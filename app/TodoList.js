@@ -4,32 +4,22 @@ const {
 
 class TodoList extends React.Component {
 	render() {
+        const { todos } = this.props;
+        const todoElements = todos.map((todo) => {
+            <li key={todo.id}>
+                <TodoItem
+                    title={todo.title}
+                    completed={todo.completed}
+                />
+            </li>
+        });
 
-        // set TodoItem param (title, completed).
-        // how to use: just like set html attribute. 
-        return (
-            <ul>
-                <li>
-                    <TodoItem 
-                        title="item 1"
-                        completed={true}
-                    />      
-                </li>
-                <li>
-                    <TodoItem 
-                        title="item 2"
-                        completed={false}
-                    />
-                </li>
-                <li>
-                    <TodoItem 
-                        title="item 3"
-                        completed={false}
-                    />
-                </li>
-            </ul>
-        );
+        return <ul>{todoElements}</ul>;
 	}
 }
+
+TodoList.propTypes = {
+    todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+};
 
 window.App.TodoList = TodoList;
