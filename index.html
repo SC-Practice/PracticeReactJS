@@ -6,14 +6,27 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+
+        
     </head>
     <body>
         <div id="app"></div>
        
+        <!-- 1. init window.app -->
+        <script>
+            window.App = {};
+        </script>
+
+        <!-- 2. include TodoApp.js -->
+        <script type="text/babel" src="./TodoApp.js"></script>
+
+        <!-- 3. get TodoApp components from window.App -->
         <script type="text/babel">
-            // SeanNote: 注意 render Html 銜接指定載入元素間有"逗號"
+            const { TodoApp } = window.App;
+
+            // 4. To render TodoApp component in container.
             ReactDOM.render(
-                <h1>hello, world</h1>,
+                <TodoApp />, 
                 document.getElementById('app')
             );
         </script>
