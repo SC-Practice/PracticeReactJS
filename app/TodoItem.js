@@ -10,7 +10,7 @@ class TodoItem extends React.Component {
                 <span>{title}</span>
                 <button>x</button>
             </div>	
-        )
+        );
 	}
 }
 

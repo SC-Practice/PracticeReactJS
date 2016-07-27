@@ -1,15 +1,16 @@
 const {
     InputField,
     TodoHeader,
-    TodoList
+    TodoList,
+    TodoItem
 } = window.App;
 
 class TodoApp extends React.Component {
     render() {
         return (
             <div>
-                <TodoHeader />
-                <InputField />
+                <TodoHeader todoCount={99} />
+                <InputField placeholder="新增代辦事項"/>
                 <TodoList />
             </div>
         );

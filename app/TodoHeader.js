@@ -4,7 +4,7 @@ class TodoHeader extends React.Component {
 
         return (            
             <div>
-                <h1>{name}代辦清單</h1>
+                <h1>{name}</h1>
                 <p>Hello, {username}, 你有 {todoCount} 項未完成代辦事項。</p>
             </div>
         );
