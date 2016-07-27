@@ -1,6 +1,6 @@
 const {       
     TodoItem
-} = window.App.TodoItem;
+} = window.App;
 
 class TodoList extends React.Component {
 	render() {
