@@ -1,6 +1,12 @@
 class InputField extends React.Component {
     render() {
-        return <div>InputField</div>;
+        const { placeholder } = this.props;
+        return (
+            <div>
+                Hello, 你有n項未完成代辦事項
+                <input type="text" placeholder="{placeholder}" />
+            </div>
+        );
     }
 }
 

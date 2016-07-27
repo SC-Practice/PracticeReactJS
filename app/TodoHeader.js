@@ -1,6 +1,13 @@
 class TodoHeader extends React.Component {
     render() {
-        return <div>TodoHeader</div>;
+        const { name, username, todoCount } = this.props;
+
+        return (            
+            <div>
+                <h1>{name}代辦清單</h1>
+                <p>Hello, {username}, 你有 {todoCount} 項未完成代辦事項。</p>
+            </div>
+        );
     }
 }
 
