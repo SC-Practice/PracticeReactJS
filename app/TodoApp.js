@@ -5,7 +5,7 @@ const {
     TodoItem
 } = window.App;
 
-const todos = [
+const demoTodos = [
     {
         id: 0,
         title: 'Item 1',
@@ -27,7 +27,7 @@ class TodoApp extends React.Component {
     constructor(props, context){
         super(props, context);
         this.state = {
-            todos: [...todos]
+            todos: [...demoTodos]
         };
     }
     
@@ -48,6 +48,11 @@ class TodoApp extends React.Component {
                             todos: _deleteTodo(todos, id)
                         })
                     }
+                    onTogglTodo={
+                        (id, completed) => this.setState({
+                            todos: _toggleTodo(todos, id, completed)
+                        })
+                    }
                 />
             </div>
         );
@@ -62,5 +67,14 @@ const _deleteTodo = (todos, id) => {
 
     return todos;
 };
+
+const _toggleTodo = (todos, id, completed) => {
+    const target = todos.find((todo) => todo.id === id);
+    if (target) {
+        target.completed = completed;
+    }
+
+    return todos;
+}
 
 window.App.TodoApp = TodoApp;

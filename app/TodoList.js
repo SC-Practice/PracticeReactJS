@@ -4,17 +4,17 @@ const {
 
 class TodoList extends React.Component {
 	render() {
-        const { todos, onDeleteTodo } = this.props;
-        const todoElements = todos.map((todo) => {
-            <li key={todo.id}>
+        const { todos, onDeleteTodo, onToggleTodo } = this.props;
+        const todoElements = todos.map((todo) => {            
+            return <li key={todo.id}>            
                 <TodoItem
                     title={todo.title}
                     completed={todo.completed}
                     onDelete={() => onDeleteTodo && onDeleteTodo(todo.id)}
+                    onToggle={() => onToggleTodo && onToggleTodo(todo.id, completed)}
                 />
             </li>
         });
-
         return <ul>{todoElements}</ul>;
 	}
 }
