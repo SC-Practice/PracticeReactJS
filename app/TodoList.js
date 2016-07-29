@@ -4,7 +4,7 @@ const {
 
 class TodoList extends React.Component {
 	render() {
-        const { todos, onDeleteTodo, onToggleTodo } = this.props;
+        const { todos, onDeleteTodo, onToggleTodo, onUpdate } = this.props;
         const todoElements = todos.map((todo) => {            
             return <li key={todo.id}>            
                 <TodoItem
@@ -12,6 +12,7 @@ class TodoList extends React.Component {
                     completed={todo.completed}
                     onDelete={() => onDeleteTodo && onDeleteTodo(todo.id)}
                     onToggle={() => onToggleTodo && onToggleTodo(todo.id, completed)}
+                    onUpdate={() => onUpdateTodo && onUpdateTodo(todo.id, todo.title)}
                 />
             </li>
         });

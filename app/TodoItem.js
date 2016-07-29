@@ -8,30 +8,30 @@ class TodoItem extends React.Component {
         this.toggleEditMode = this.toggleEditMode.bind(this);
     }
 
-    toggleEditMode(){
+    toggleEditMode() {
         this.setState({ editable: !this.state.editable });
     }
 
-	render() {
+    render() {
         return this.state.editable ? this.renderEditMode() : this.renderViewMode();
     }
 
     renderViewMode() {
         const { title, completed, onDelete, onToggle } = this.props;
         return (
-            <div>		
-                <input type="checkbox" checked={completed} onChange={() => onToggle && onToggle(!completed)} /> 
+            <div>
+                <input type="checkbox" checked={completed} onChange={() => onToggle && onToggle(!completed) } />
                 <span onDoubleClick={this.toggleEditMode}> {title} </span>
-                <button onClick={() => onDelete && onDelete()} >x</button>
-            </div>	
+                <button onClick={() => onDelete && onDelete() } >x</button>
+            </div>
         );
-	}
+    }
 
     renderEditMode() {
-        const { title } = this.props;
+        const { title, onUpdate } = this.props;
         return (
             <InputField
-                autoFocus           
+                autoFocus
                 placeholder="編輯代辦事項"
                 value={title}
                 onBlur={this.toggleEditMode}
@@ -40,8 +40,12 @@ class TodoItem extends React.Component {
                         e.preventDefault();
                         this.toggleEditMode();
                     }
-                }}
-            />
+                } }
+                onSubmitEditing={(content) => {
+                    onUpdate && onUpdate(content);
+                    this.toggleEditMode();
+                } }
+                />
         );
     }
 }

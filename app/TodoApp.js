@@ -60,6 +60,11 @@ class TodoApp extends React.Component {
                             todos: _toggleTodo(todos, id, completed)
                         })
                     }
+                    onUpdateTodo={
+                        (id, title) => this.setSate({
+                            todos: _updateTodo(todos, id, title)
+                        })
+                    }
                     />
             </div>
         );
@@ -79,6 +84,15 @@ const _toggleTodo = (todos, id, completed) => {
     const target = todos.find((todo) => todo.id === id);
     if (target) {
         target.completed = completed;
+    }
+
+    return todos;
+}
+
+const _updateTodo = (todos, id, title) => {
+    const target = todos.find((todo) => todo.id === id);
+    if (target) {
+        target.title = title;
     }
 
     return todos;
