@@ -31,6 +31,14 @@ class TodoApp extends React.Component {
         };
     }
 
+    udpateTodoBy(udateFn) {
+        return (...args) => {
+            this.setSate({
+                todos: updateFn(this.state.todos, ...args)
+            });
+        }
+    }
+
     render() {
         const { todos } = this.state;
         return (
@@ -42,29 +50,13 @@ class TodoApp extends React.Component {
                     />
                 <InputField
                     placeholder="新增代辦事項"
-                    onSubmitEditing={
-                        (title) => this.setState({
-                            todos: _createTodo(todos, title)
-                        })
-                    }
+                    onSubmitEditing={ this.udpateTodoBy(_createTodo) }
                     />
                 <TodoList
                     todos={todos}
-                    onDeleteTodo={
-                        (id) => this.setState({
-                            todos: _deleteTodo(todos, id)
-                        })
-                    }
-                    onTogglTodo={
-                        (id, completed) => this.setState({
-                            todos: _toggleTodo(todos, id, completed)
-                        })
-                    }
-                    onUpdateTodo={
-                        (id, title) => this.setSate({
-                            todos: _updateTodo(todos, id, title)
-                        })
-                    }
+                    onDeleteTodo={ this.updateTodoBy(_delete) }
+                    onTogglTodo={ this.updateTodoBy(_toggleTodo) }
+                    onUpdateTodo={ this.updateTodoBy(_updateTodo) }
                     />
             </div>
         );
