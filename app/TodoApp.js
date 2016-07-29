@@ -43,7 +43,7 @@ class TodoApp extends React.Component {
                 <InputField placeholder="新增代辦事項"/>
                 <TodoList 
                     todos={todos}
-                    onDeleteTool={
+                    onDeleteTodo={
                         (id) => this.setState({
                             todos: _deleteTodo(todos, id)
                         })

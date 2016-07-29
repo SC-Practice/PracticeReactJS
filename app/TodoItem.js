@@ -21,18 +21,19 @@ class TodoItem extends React.Component {
         return (
             <div>		
                 <input type="checkbox" checked={completed} onChange={() => onToggle && onToggle(!completed)} /> 
-                <span>{title}</span>
+                <span onDoubleClick={this.toggleEditMode}> {title} </span>
                 <button onClick={() => onDelete && onDelete()} >x</button>
             </div>	
         );
 	}
 
     renderEditMode() {
+        const { title } = this.props;
         return (
             <InputField
                 autoFocus           
                 placeholder="編輯代辦事項"
-                value={this.props.title}
+                value={title}
                 onBlur={this.toggleEditMode}
                 onKeyDown={(e) => {
                     if (e.keyCode === 27) {

@@ -1,9 +1,8 @@
 class InputField extends React.Component {
     render() {
-        const { placeholder } = this.props;
         return (
             <div>                
-                <input type="text" placeholder="{placeholder}" />
+                <input {...this.props} type="text" />
             </div>
         );
     }
