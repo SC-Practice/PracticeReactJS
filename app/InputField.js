@@ -13,8 +13,10 @@ class InputField extends React.Component {
     render() {
         return (
             <div>
-                <input {...this.props}
+                <input 
+                    {...this.props}
                     type="text"
+                    value={this.state.value}
                     onKeyDown={this.handleKeyDown}
                     onChange={this.handleChange}
                     />

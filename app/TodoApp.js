@@ -31,9 +31,9 @@ class TodoApp extends React.Component {
         };
     }
 
-    udpateTodoBy(udateFn) {
+    updateTodoBy(updateFn) {
         return (...args) => {
-            this.setSate({
+            this.setState({
                 todos: updateFn(this.state.todos, ...args)
             });
         }
@@ -50,11 +50,11 @@ class TodoApp extends React.Component {
                     />
                 <InputField
                     placeholder="新增代辦事項"
-                    onSubmitEditing={ this.udpateTodoBy(_createTodo) }
+                    onSubmitEditing={ this.updateTodoBy(_createTodo) }
                     />
                 <TodoList
                     todos={todos}
-                    onDeleteTodo={ this.updateTodoBy(_delete) }
+                    onDeleteTodo={ this.updateTodoBy(_deleteTodo) }
                     onTogglTodo={ this.updateTodoBy(_toggleTodo) }
                     onUpdateTodo={ this.updateTodoBy(_updateTodo) }
                     />
