@@ -6,8 +6,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
+        
         <!-- github/fetch -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/1.0.0/fetch.js"></script>
+        
+        <!--引入 Facebook 官方的 Flux-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flux/2.1.1/Flux.js"></script>
+
+        <script type="text/babel" src="./dispatcher/AppDispatcher.js"></script>
 
         <link href="./SiteStyle.css" rel="styleheet" type="text/css" >
     </head>
@@ -20,12 +26,11 @@
         </script>
 
         <!-- 2. include TodoApp.js -->
-        <script type="text/babel" src="./app/InputField.js"></script>
-        <script type="text/babel" src="./app/TodoHeader.js"></script>
-        <script type="text/babel" src="./app/TodoItem.js"></script>
-        <script type="text/babel" src="./app/TodoList.js"></script>
-
-        <script type="text/babel" src="./app/TodoApp.js"></script>       
+        <script type="text/babel" src="./componets/InputField.js"></script>
+        <script type="text/babel" src="./componets/TodoHeader.js"></script>
+        <script type="text/babel" src="./componets/TodoItem.js"></script>
+        <script type="text/babel" src="./componets/TodoList.js"></script>
+        <script type="text/babel" src="./componets/TodoApp.js"></script>       
 
         <!-- 3. get TodoApp components from window.App -->
         <script type="text/babel">
