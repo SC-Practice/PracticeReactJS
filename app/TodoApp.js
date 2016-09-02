@@ -5,30 +5,38 @@ const {
     TodoItem
 } = window.App;
 
-const demoTodos = [
-    {
-        id: 0,
-        title: 'Item 1',
-        completed: false
-    },
-    {
-        id: 1,
-        title: 'Item 2',
-        completed: true
-    },
-    {
-        id: 2,
-        title: 'Item 3',
-        completed: false
-    }
-];
+// const demoTodos = [
+//     {
+//         id: 0,
+//         title: 'Item 1',
+//         completed: false
+//     },
+//     {
+//         id: 1,
+//         title: 'Item 2',
+//         completed: true
+//     },
+//     {
+//         id: 2,
+//         title: 'Item 3',
+//         completed: false
+//     }
+// ];
 
 class TodoApp extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            todos: [...demoTodos]
+            todos: []
         };
+    }
+
+    // add componetDitMount() to get data
+    componentDidMount() {
+        // use github/fetch to get remote data
+        fetch('http://localhost:3000/todos')            // 1. 使用 fetch 回傳的是 promise 物件
+            .then((response) => response.json())        // 2. 解析 response 資料，將它轉成 js 物件
+            .then((todos) => this.setState({ todos })); // 3. 更新餘件 state
     }
 
     updateTodoBy(updateFn) {
