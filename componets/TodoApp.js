@@ -1,52 +1,40 @@
 const {
+    // 1. 引入 TodoActions 和 TodoStore
+    TodoActions,
+    TodoStore,
     InputField,
     TodoHeader,
     TodoList,
     TodoItem
 } = window.App;
 
-// const demoTodos = [
-//     {
-//         id: 0,
-//         title: 'Item 1',
-//         completed: false
-//     },
-//     {
-//         id: 1,
-//         title: 'Item 2',
-//         completed: true
-//     },
-//     {
-//         id: 2,
-//         title: 'Item 3',
-//         completed: false
-//     }
-// ];
-
 class TodoApp extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            todos: []
+            // 3. 初始化資料從 TodoStore 取出
+            todos: TodoStore.getAll()
         };
     }
 
     // add componetDitMount() to get data
     componentDidMount() {
-        // use github/fetch to get remote data
-        fetch('http://localhost:3000/todos')            // 1. 使用 fetch 回傳的是 promise 物件
-            .then((response) => response.json())        // 2. 解析 response 資料，將它轉成 js 物件
-            .then((todos) => this.setState({ todos })); // 3. 更新餘件 state
+        // 4. 向 Server 請求資料改為調用 TodoActions
+        TodoActions.loadTodos();
+
+        // 5. 向 TodoStore 註冊監聽器: 當監聽器被觸發，便讓 state 與 TodoStore 資料同步
+        this._removeChangeListener = TodoStore.addChangeListener(
+            () => this.setState({ todos: TodoStore.getAll() })
+        );
     }
 
-    updateTodoBy(updateFn) {
-        return (...args) => {
-            this.setState({
-                todos: updateFn(this.state.todos, ...args)
-            });
-        }
+    componetWillUnmout() {
+        // 6. 向 TodoStore 註銷監聽器
+        this._removeChangeListener();
     }
 
+    // 7. 所有渲染的資料從 state 中取，這份 state 與 TodoStore 是同步的；
+    //    所有改變資料的操作都改為調用 TodoActions
     render() {
         const { todos } = this.state;
         return (
@@ -58,54 +46,19 @@ class TodoApp extends React.Component {
                     />
                 <InputField
                     placeholder="新增代辦事項"
-                    onSubmitEditing={ this.updateTodoBy(_createTodo) }
+                    onSubmitEditing={ TodoActions.createTodo }
                     />
                 <TodoList
                     todos={todos}
-                    onDeleteTodo={ this.updateTodoBy(_deleteTodo) }
-                    onTogglTodo={ this.updateTodoBy(_toggleTodo) }
-                    onUpdateTodo={ this.updateTodoBy(_updateTodo) }
+                    onDeleteTodo={ TodoActions.deleteTodo }
+                    onTogglTodo={ TodoActions.toggleTodo }
+                    onUpdateTodo={ TodoActions.updateTodo }
                     />
             </div>
         );
     }
 }
 
-const _deleteTodo = (todos, id) => {
-    const idx = todos.findIndex((todo) => todo.id === id);
-    if (idx !== -1) {
-        todos.splice(idx, 1);
-    }
-
-    return todos;
-};
-
-const _toggleTodo = (todos, id, completed) => {
-    const target = todos.find((todo) => todo.id === id);
-    if (target) {
-        target.completed = completed;
-    }
-
-    return todos;
-}
-
-const _updateTodo = (todos, id, title) => {
-    const target = todos.find((todo) => todo.id === id);
-    if (target) {
-        target.title = title;
-    }
-
-    return todos;
-}
-
-const _createTodo = (todos, title) => {
-    todos.push({
-        id: todos[todos.length - 1].id + 1,
-        title,
-        completed: false
-    });
-
-    return todos;
-}
+// 2. 業務邏輯已移到 TodoStore 存放，View 上的邏輯移掉。
 
 window.App.TodoApp = TodoApp;

@@ -1,10 +1,7 @@
-const {
-    ActionTypes,
-    AppDispatcher
-} = window.App;
+const { ActionTypes, AppDispatcher } = window.App;
 
 window.App.TodoActions = {
-    
+
     loadTodos() {
         fetch('http://localhost:3000/todos')
             .then((response) => response.json())

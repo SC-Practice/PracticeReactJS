@@ -14,7 +14,7 @@ const _createTodo = (todos, title) => {
     });
 
     return todos;
- };
+};
 
 const _updateTodo = (todos, id, title) => {
     const target = todos.find((todo) => todo.id === id);
@@ -59,7 +59,7 @@ window.App.TodoStore = {
     *   例：Dispatcher.waitFor([ token1, token2 ])
     */
     dispatchToken: AppDispatcher.register((action) => {
-        switch(action.type) {
+        switch (action.type) {
             case ActionTypes.LOAD_TODOS_SUCCESS:
                 _todos = action.todos;
                 break;
@@ -75,8 +75,8 @@ window.App.TodoStore = {
             case ActionTypes.DELETE_TODO:
                 _todos = _deleteTodo(_todos, action.id);
                 break;
-        }    
-        
+        }
+
         _emitter.emit(CHANGE_EVENT); // 5. 資料改變時，觸發事件
     })
 }
