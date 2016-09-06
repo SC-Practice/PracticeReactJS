@@ -18,7 +18,7 @@ window.App.TodoActions = {
         });
     },
 
-    updateTODO(id, title) {
+    updateTodo(id, title) {
         AppDispatcher.dispatch({
             type: ActionTypes.UPDATE_TODO,
             id,
