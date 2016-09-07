@@ -4,15 +4,15 @@ const {
 
 class TodoList extends React.Component {
     render() {
-        const { todos, onDeleteTodo, onToggleTodo, onUpdateTodo } = this.props;
+        const { todos, onUpdateTodo, onToggleTodo, onDeleteTodo } = this.props;
         const todoElements = todos.map((todo) => {
-            return <li key={todo.id}>
+            <li key={todo.id}>
                 <TodoItem
                     title={todo.title}
                     completed={todo.completed}
-                    onDelete={() => onDeleteTodo && onDeleteTodo(todo.id) }
-                    onToggle={() => onToggleTodo && onToggleTodo(todo.id, completed) }
                     onUpdate={(content) => { onUpdateTodo && onUpdateTodo(todo.id, content) } }
+                    onToggle={() => onToggleTodo && onToggleTodo(todo.id, completed) }
+                    onDelete={() => onDeleteTodo && onDeleteTodo(todo.id) }
                     />
             </li>
         });
@@ -22,6 +22,8 @@ class TodoList extends React.Component {
 
 TodoList.propTypes = {
     todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    onUpdateTodo: React.PropTypes.func,
+    onToggleTodo: React.PropTypes.func,
     onDeleteTodo: React.PropTypes.func
 };
 
